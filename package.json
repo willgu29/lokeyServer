@@ -1,0 +1,22 @@
+{
+  "name": "lokeyserver",
+  "version": "1.0.0",
+  "description": "location app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willgu29/lokeyServer.git"
+  },
+  "keywords": [
+    "location"
+  ],
+  "author": "Will Gu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/willgu29/lokeyServer/issues"
+  },
+  "homepage": "https://github.com/willgu29/lokeyServer#readme"
+}
