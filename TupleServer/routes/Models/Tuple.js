@@ -6,18 +6,15 @@ var tupleSchema = new mongoose.Schema({
     fullName: String, //of person
 	dateCreated: {type: Date, default: Date.now},
     loc: {
-        type: String,
-        default: "Point",
-        coordinates: [Number], //[Longitude, latitude]
-        index: "2dsphere"
+        type: {type: String, default: "Point"},
+        coordinates: [Number] //[Longitude, latitude]
     },
     locationAddress: String, //11130 Roebling Avenue, Los Angeles, etc.
     locationPostalCode: String, //CA 90024, etc.
-	name: String, //of tuple
 	description: String,
     startTime: String, //to be changed to Date later...
     endTime: String,
-    status: String, //PRE, IN PROGRESS, ENDED
+    status: Number, //1= PRE, 2= IN PROGRESS, 3= ENDED
     tuplerList_id: mongoose.Schema.Types.ObjectId,
     messageThread_id: mongoose.Schema.Types.ObjectId
    
@@ -26,5 +23,8 @@ var tupleSchema = new mongoose.Schema({
 
 
 });
+
+tupleSchema.index({ loc: '2dsphere' });
+
 
 module.exports = Tuple = mongoose.model('Tuple', tupleSchema);

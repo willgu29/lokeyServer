@@ -1,18 +1,19 @@
 var express = require('express');
 var router = express.Router();
 var Message = require("./Models/Message.js");
+var mongoose = require("mongoose");
 
 // ** messages //
 
 
 //Get all messages in messageThread
-router.get("/:convoID", function (req, res) {
-  console.log("/messages/:convoID GET " + req.params.convoID);
+router.get("/", function (req, res) {
+  console.log("/messages/ GET");
   var searchID;
   // if (req.params.userID == "me") {
   //   searchID = req.user._id;
   // } else {
-    searchID = req.params.convoID;
+    searchID = req.body.threadID;
   // }
 
   //sort by date created (does this by default)
@@ -25,10 +26,10 @@ router.get("/:convoID", function (req, res) {
 });
 
 
-router.post("/:convoID", function (req, res) {
-  console.log("/messages/:convoID POST", req.params.convoID);
+router.post("/", function (req, res) {
+  console.log("/messages/ POST");
 
-  var convoID = req.params.convoID;
+  var convoID = req.body.threadID;
     var ObjectId = require('mongoose').Types.ObjectId; 
     var query = { "_id" : new ObjectId(convoID)};
     MessageThread.findOne(query, function (err, thread) {

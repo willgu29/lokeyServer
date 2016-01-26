@@ -1,35 +1,24 @@
 var express = require('express');
 var router = express.Router();
 var User = require("./Models/User.js");
+var mongoose = require("mongoose");
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  var query = User.find({}).limit(req.body.limit).skip(req.body.skip);
+
+  var query;
+  if (req.body.userID) {
+    query = User.findOne({_id:req.body.userID}).limit(req.body.limit).skip(req.body.skip);
+  } else {
+    query = User.find({}).limit(req.body.limit).skip(req.body.skip);
+  }
+
   query.select('-password -phoneNumber');
   query.exec(function (err, users) {
     if (err) { console.log(err);} 
     else { res.json(users);}
   });
 });
-
-router.get("/:userID", function (req, res) {
-  var searchID;
-  if (req.params.userID == "me") {
-    searchID = req.user._id;
-  } else {
-    searchID = req.params.userID;
-  }
-
-  var query = User.findOne({_id:searchID}).limit(req.body.limit).skip(req.body.skip);
-  query.select('-password -phoneNumber');
-  query.exec(function (err, user) {
-    if (err) { console.log(err);} 
-    else { res.json(user);}
-  });
-
-
-});
-
 
 router.post('/createAccount', function (req, res) {
         console.log("/createAccount POST");

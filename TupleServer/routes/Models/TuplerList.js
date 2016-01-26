@@ -9,8 +9,8 @@ var tuplerListSchema = new mongoose.Schema({
     peopleInterested_ids: [mongoose.Schema.Types.ObjectId],
     peopleAttending_fullNames: [String],
     peopleAttending_ids: [mongoose.Schema.Types.ObjectId],
-    peopleAttending_status: [Number], // 0 == attending, 1 == OTW, 2 == Arrived
-   
+    peopleAttending_status: [Number], // 0 == attending, 1 == OTW, 2 == Arrived, 3 = left
+    tuple_id: mongoose.Schema.Types.ObjectId
    
 
 

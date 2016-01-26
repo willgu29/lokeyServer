@@ -10,6 +10,7 @@ var users = require('./routes/users');
 var messages = require('./routes/messages');
 var messageThreads = require("./routes/messageThreads");
 var tuples = require('./routes/tuples');
+var tuplerLists = require("./routes/tuplerLists");
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use('/users', users);
 app.use('/messages', messages);
 app.use('/messageThreads', messageThreads);
 app.use('/tuples', tuples);
+app.use('/tuplerLists', tuplerLists)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -72,6 +74,20 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(callback) {
   console.log("DB opened");
+});
+
+
+/*function loggedIn(req, res, next) {
+    if (req.user) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
+*/
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
 });
 
 
