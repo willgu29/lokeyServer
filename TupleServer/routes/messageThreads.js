@@ -24,8 +24,7 @@ router.post("/", function (req, res) {
   
    
         //Create it
-    var newThread =new MessageThread({ tuple_id: req.body.tupleID, 
-                              participant_ids: req.body.participant_ids,
+    var newThread =new MessageThread({ participant_ids: req.body.participant_ids,
                               participant_fullNames: req.body.participant_fullNames,
                               participant_phoneNumbers: req.body.participant_phoneNumbers,
                               messageCount: 0});
