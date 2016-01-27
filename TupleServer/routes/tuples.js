@@ -5,27 +5,27 @@ var mongoose = require("mongoose");
 // ** /tuples
 
 router.get("/all", function (req, res) {
-  console.log("/tuples/all GET");
+  console.log("/api/tuples/all GET");
 
   //TODO: Only get events from date xx and further
   Tuple.find({}, function (err, tupleObjects) {
-    if (err) return console.error(err);
+    if (err) return res.json(err);
     res.json(tupleObjects);
   }).limit(req.body.limit).skip(req.body.skip);
 });
 
 router.get("/", function (req, res) {
-  console.log("/tuples GET");
+  console.log("/api/tuples GET");
 
   //TODO: Only get events from date xx and further
-  Tuple.find({loc: req.body.loc, status: "1"}, function (err, tupleObjects) {
+  Tuple.find({loc: req.body.loc, status: 1}, function (err, tupleObjects) {
     if (err) return console.error(err);
     res.json(tupleObjects);
   }).limit(req.body.limit).skip(req.body.skip);
 });
 
 router.post("/", function (req, res) {
-  console.log("/tuples/ POST ");
+  console.log("/api/tuples/ POST ");
 
 
     var TEST_ID = mongoose.Types.ObjectId('4edd40c86762e0fb12000003');
