@@ -13,6 +13,13 @@ var tuples = require('./routes/tuples');
 var tuplerLists = require("./routes/tuplerLists");
 
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+var chatroom = require("./routes/chat");
+
+chatroom.connection(io);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -86,9 +93,11 @@ db.once('open', function(callback) {
 }
 */
 
-app.listen(3000, function () {
+http.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
+
+
 
 
 
