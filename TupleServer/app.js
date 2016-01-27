@@ -33,12 +33,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/messages', messages);
-app.use('/messageThreads', messageThreads);
-app.use('/tuples', tuples);
-app.use('/tuplerLists', tuplerLists)
+app.use('/api', routes);
+app.use('/api/users', users);
+app.use('/api/messages', messages);
+app.use('/api/messageThreads', messageThreads);
+app.use('/api/tuples', tuples);
+app.use('/api/tuplerLists', tuplerLists)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
