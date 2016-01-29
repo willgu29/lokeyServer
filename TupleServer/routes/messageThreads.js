@@ -26,8 +26,8 @@ router.post("/", function (req, res) {
         //Create it
     var newThread =new MessageThread({ participant_ids: req.body.participant_ids,
                               participant_fullNames: req.body.participant_fullNames,
-                              participant_phoneNumbers: req.body.participant_phoneNumbers,
-                              messageCount: 0});
+                              participant_phoneNumbers: req.body.participant_phoneNumbers
+                               });
 
    	newThread.save(function (err, newThread) {
         if (err) {

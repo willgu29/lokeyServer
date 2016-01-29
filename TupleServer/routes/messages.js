@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var MessageThread = require("./Models/MessageThread.js");
 var Message = require("./Models/Message.js");
 var mongoose = require("mongoose");
 
@@ -15,10 +16,11 @@ router.get("/", function (req, res) {
   // } else {
     searchID = req.body.threadID;
   // }
-
+  var TEST_ID = mongoose.Types.ObjectId('4edd40c86762e0fb12000003');
+  console.log("That body: ",req.query.threadID);
   //sort by date created (does this by default)
-  Message.find({toMessageThread_id:searchID}, function (err, messageObjects) {
-                if (err) {return console.error(err);}
+  Message.find({toMessageThread_id:TEST_ID}, function (err, messageObjects) {
+                if (err) {return res.json(err);}
                 else {
                   res.json(messageObjects);
                 }
@@ -28,17 +30,19 @@ router.get("/", function (req, res) {
 
 router.post("/", function (req, res) {
 
-  var convoID = req.body.threadID;
+    var TEST_ID = mongoose.Types.ObjectId('4edd40c86762e0fb12000003');
+
+    var convoID = req.body.threadID;
     var ObjectId = require('mongoose').Types.ObjectId; 
-    var query = { "_id" : new ObjectId(convoID)};
+    var query = { "_id" : new ObjectId(TEST_ID)};
     MessageThread.findOne(query, function (err, thread) {
       if (err){console.log(err);}
       else {
-          if (thread.messageCount == null){
-            thread.messageCount = 1;
-          } else {
-            thread.messageCount++;
+          if (thread == null) {
+            return;
           }
+          thread.dateLastUpdated = new Date();
+
           console.log("Message count: ", thread.messageCount);
         thread.save(function (err, thread) {
 
@@ -48,10 +52,10 @@ router.post("/", function (req, res) {
     });  
 
   var newMessage = new Message({
-                          user_id: req.body.userID,
+                          user_id: TEST_ID,
                           fullName: req.body.fullName,
                           text: req.body.text,
-                          toMessageThread_id: convoID});
+                          toMessageThread_id: TEST_ID});
 
   newMessage.save(function (err, newMessage) {
      if (err) {console.error(err); return res.json({info: 
