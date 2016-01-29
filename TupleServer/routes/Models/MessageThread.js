@@ -8,7 +8,7 @@ var messageThreadSchema = new mongoose.Schema({
     participant_ids: [mongoose.Schema.Types.ObjectId], //add user_id as well (person who started)
     participant_fullNames: [String],
     participant_phoneNumbers: [Number],
-    messageCount: Number,
+    messageCount: Number
 
 
 });

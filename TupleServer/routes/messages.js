@@ -3,7 +3,7 @@ var router = express.Router();
 var Message = require("./Models/Message.js");
 var mongoose = require("mongoose");
 
-// ** messages //
+// ** /api/messages //
 
 
 //Get all messages in messageThread
@@ -27,7 +27,6 @@ router.get("/", function (req, res) {
 
 
 router.post("/", function (req, res) {
-  console.log("/messages/ POST");
 
   var convoID = req.body.threadID;
     var ObjectId = require('mongoose').Types.ObjectId; 
@@ -49,8 +48,8 @@ router.post("/", function (req, res) {
     });  
 
   var newMessage = new Message({
-                          user_id: req.user._id,
-                          fullName: req.user.fullName,
+                          user_id: req.body.userID,
+                          fullName: req.body.fullName,
                           text: req.body.text,
                           toMessageThread_id: convoID});
 
